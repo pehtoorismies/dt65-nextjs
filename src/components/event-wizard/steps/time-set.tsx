@@ -1,15 +1,23 @@
 import { DownArrow } from '@styled-icons/boxicons-solid/DownArrow'
 import { UpArrow } from '@styled-icons/boxicons-solid/UpArrow'
 import { add, assoc, subtract } from 'ramda'
-import React, { FunctionComponent } from 'react'
-import { Box, Button, Flex, Text } from 'rebass'
+import React from 'react'
+import {
+  Box,
+  Button,
+  Flex,
+  Text,
+  ButtonProps,
+  FlexProps,
+  TextProps,
+} from 'rebass'
 import styled from 'styled-components'
-import { ITime } from '../../../types'
+import { Time } from '../../../types'
 import { timeToString } from '../../../util'
 
-interface IProps {
-  time?: ITime
-  setTime: (time: ITime) => void
+interface Props {
+  time?: Time
+  setTime: (time: Time) => void
   disabled: boolean
 }
 
@@ -24,7 +32,7 @@ const Down = styled(DownArrow)`
   width: 30px;
 `
 
-const UpButton = (props: any) => (
+const UpButton = (props: ButtonProps) => (
   <Button {...props} variant="secondary" m={1} width={BOX_WIDTH}>
     <Flex alignItems="center" justifyContent="center">
       <Up />
@@ -32,7 +40,7 @@ const UpButton = (props: any) => (
   </Button>
 )
 
-const DownButton = (props: any) => (
+const DownButton = (props: ButtonProps) => (
   <Button {...props} variant="secondary" m={1} width={BOX_WIDTH}>
     <Flex alignItems="center" justifyContent="center">
       <Down />
@@ -40,11 +48,11 @@ const DownButton = (props: any) => (
   </Button>
 )
 
-const Center = (props: any) => (
+const Center = (props: FlexProps) => (
   <Flex {...props} justifyContent="center" alignItems="center" />
 )
 
-const NumberDisplay = (props: any) => (
+const NumberDisplay = (props: TextProps) => (
   <Text
     {...props}
     fontSize={50}
@@ -56,7 +64,7 @@ const NumberDisplay = (props: any) => (
   />
 )
 
-export const TimeSet: FunctionComponent<IProps> = (props: IProps) => {
+export const TimeSet = (props: Props) => {
   const { time = { minute: 0, hour: 0 }, setTime, disabled } = props
 
   const adjustMinute = (isAdd: boolean) => {

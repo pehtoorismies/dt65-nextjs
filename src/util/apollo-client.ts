@@ -1,69 +1,68 @@
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import ApolloClient from 'apollo-client';
-import { ApolloLink, from } from 'apollo-link';
-import { HttpLink } from 'apollo-link-http';
-import { onError } from 'apollo-link-error';
-import { toast } from 'react-toastify';
-
-import { getAccessToken, getIdToken, getLocalUser, logout } from './auth';
-import { ROUTES } from '../constants';
-import prop from 'ramda/es/prop';
-import path from 'ramda/es/path';
+import { InMemoryCache } from 'apollo-cache-inmemory'
+import * as H from 'history'
+import ApolloClient from 'apollo-client'
+import { ApolloLink, from } from 'apollo-link'
+import { onError } from 'apollo-link-error'
+import { HttpLink } from 'apollo-link-http'
+import { path, prop } from 'ramda'
+import { toast } from 'react-toastify'
+import { ROUTES } from '../constants'
+import { getAccessToken, getIdToken, getLocalUser, logout } from './auth'
 
 const authLink = new ApolloLink((operation, forward) => {
-  const { useAuthHeaders } = operation.getContext();
-  const accessToken = getAccessToken();
+  const { useAuthHeaders } = operation.getContext()
+  const accessToken = getAccessToken()
 
   if (useAuthHeaders !== false) {
     operation.setContext({
       headers: {
         authorization: accessToken ? `Bearer ${accessToken}` : '',
       },
-    });
+    })
   }
 
   // Call the next link in the middleware chain.
-  return forward(operation);
-});
+  return forward(operation)
+})
 
-const errorLinkWithHistory = (history: any) =>
+const errorLinkWithHistory = (history: H.History) =>
   onError(({ graphQLErrors, networkError }) => {
     if (graphQLErrors) {
       graphQLErrors.forEach((gqlError: any) => {
-        const { message, locations, path: errorPath, name } = gqlError;
+        const { message, locations, path: errorPath, name } = gqlError
         console.error(
           `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${errorPath}`
-        );
+        )
 
         if (name === 'JWTError') {
-          logout();
-          history.push(ROUTES.login);
-          toast.warn(message);
-          return;
+          logout()
+          history.push(ROUTES.login)
+          toast.warn(message)
+          return
         }
-      });
+      })
     }
     // TODO: fix network errors
     if (networkError) {
       // const { name, response, statusCode, result } = networkError;
-      const name = prop('name', networkError);
+      const name = prop('name', networkError)
 
       if (name === 'ServerError') {
-        const statusCode = path(['statusCode'], networkError);
+        const statusCode = path(['statusCode'], networkError)
 
         console.error(
           `[Network error]: Name: ${name}, Status code: ${statusCode}`
-        );
+        )
       }
 
-      console.error(networkError);
+      console.error(networkError)
     }
-  });
+  })
 
-const inMemCache = new InMemoryCache();
+const inMemCache = new InMemoryCache()
 
-const createClient = (history: any) => {
-  const errorLink = errorLinkWithHistory(history);
+export const createClient = (history: any) => {
+  const errorLink = errorLinkWithHistory(history)
 
   const client = new ApolloClient({
     link: from([
@@ -95,18 +94,18 @@ const createClient = (history: any) => {
     resolvers: {
       Mutation: {
         logoutLocalUser: (_, variables, { cache }) => {
-          logout();
+          logout()
           cache.writeData({
             data: {
               localUser: null,
             },
-          });
+          })
 
-          return null;
+          return null
         },
       },
     },
-  });
+  })
 
   inMemCache.writeData({
     data: {
@@ -114,9 +113,7 @@ const createClient = (history: any) => {
       eventsView: 'LIST',
       backUrl: 'tere',
     },
-  });
+  })
 
-  return client;
-};
-
-export default createClient;
+  return client
+}

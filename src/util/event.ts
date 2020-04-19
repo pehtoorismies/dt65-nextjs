@@ -1,27 +1,27 @@
-import { find, propEq } from 'ramda';
+import { find, propEq } from 'ramda'
 
-import { EventType, IEventTypeDescriptor } from '../types';
+import { EventType, EventTypeDescriptor } from '../types'
 
 const toApiType = (
-  evtType: EventType,
-  events: IEventTypeDescriptor[]
+  eventType: EventType,
+  events: EventTypeDescriptor[]
 ): string => {
-  const eType: IEventTypeDescriptor = find(propEq('id', evtType))(events);
-  return eType.apiType;
-};
+  const type: EventTypeDescriptor = find(propEq('id', eventType))(events)
+  return type.apiType
+}
 
 const fromEventType = (
-  e: EventType,
-  events: IEventTypeDescriptor[]
-): IEventTypeDescriptor => {
-  return find(propEq('id', e))(events);
-};
+  eventType: EventType,
+  events: EventTypeDescriptor[]
+): EventTypeDescriptor => {
+  return find(propEq('id', eventType))(events)
+}
 
 const fromApiType = (
   apiType: string,
-  events: IEventTypeDescriptor[]
-): IEventTypeDescriptor => {
-  return find(propEq('apiType', apiType))(events);
-};
+  events: EventTypeDescriptor[]
+): EventTypeDescriptor => {
+  return find(propEq('apiType', apiType))(events)
+}
 
-export { fromApiType, toApiType, fromEventType };
+export { fromApiType, toApiType, fromEventType }

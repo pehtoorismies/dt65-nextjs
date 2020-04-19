@@ -1,12 +1,12 @@
-import React, { Fragment, FunctionComponent, useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 import { Box, Flex } from 'rebass'
-import { IEventStep } from '../../../types'
+import { EventStep } from '../../../types'
 import { LeftArrowButton, RightArrowButton } from '../../common'
 import { BaseStep } from './base-step'
 
-interface Props extends IEventStep {
+interface Props extends EventStep {
   description?: string
   setDescription: (description: string) => void
 }
@@ -42,7 +42,7 @@ const formats = [
   'video',
 ]
 
-export const DescriptionStep: FunctionComponent<Props> = ({
+export const DescriptionStep = ({
   toPrevStep,
   toNextStep,
   setDescription,

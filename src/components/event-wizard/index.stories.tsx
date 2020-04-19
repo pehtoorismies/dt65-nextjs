@@ -3,7 +3,7 @@ import { action } from '@storybook/addon-actions'
 import { boolean, number, text, withKnobs } from '@storybook/addon-knobs'
 import React from 'react'
 import { EVENT_TYPES } from '../../constants'
-import { IEventState } from '../../types'
+import { EventState } from '../../types'
 import { StepCounter } from './step-counter'
 import {
   CreateStep,
@@ -38,7 +38,7 @@ const commonActions = {
   toNextStep: action('Next'),
   toPrevStep: action('Prev'),
 }
-const eventState: IEventState = {
+const eventState: EventState = {
   race: true,
   description: 'asdasda',
   title: 'Title',
@@ -71,12 +71,15 @@ export const descriptionStep = () => (
     setDescription={action('Set description')}
   />
 )
+
+const hasRace = () => {
+  if (boolean('hasRace', false)) {
+    return boolean('isRace', false)
+  }
+}
+
 export const raceStep = () => (
-  <RaceStep
-    isRace={boolean('isRace', undefined)}
-    setRace={action('set')}
-    {...commonActions}
-  />
+  <RaceStep isRace={hasRace()} setRace={action('set')} {...commonActions} />
 )
 export const timeStep = () => (
   <TimeStep

@@ -5,68 +5,68 @@ import { defaultTo, equals, filter, findIndex, nth, pipe, split } from 'ramda'
 import { isNull, isUndefined } from 'ramda-adjunct'
 import { EVENTS_PATH, EVENT_TYPES, ROUTES } from '../constants'
 import {
-  ICalEvent,
-  IEventExtended,
-  IEventResp,
-  IEventState,
-  ISubject,
+  CalEvent,
+  EventExtended,
+  EventResp,
+  EventState,
+  Subject,
 } from '../types'
 import { fromApiType } from './event'
 import { dateToFinnish, dateToTime } from './time'
 
 const isNullOrUndefined = <T>(a: T) => isNull(a) || isUndefined(a)
 
-const isParticipant = (user: ISubject, participants: ISubject[]) => {
+const isParticipant = (user: Subject, participants: Subject[]) => {
   return (
-    findIndex((p: ISubject) => {
+    findIndex((p: Subject) => {
       return user.sub === p.sub
     })(participants || []) >= 0
   )
 }
 
-const parseEvent = (evt: IEventResp): IEventExtended => {
-  const date = parseISO(evt.date)
-  const time = evt.exactTime ? format(date, 'HH:mm') : ''
+const parseEvent = (eventResponse: EventResp): EventExtended => {
+  const date = parseISO(eventResponse.date)
+  const time = eventResponse.exactTime ? format(date, 'HH:mm') : ''
 
   return {
-    ...evt,
+    ...eventResponse,
     time,
-    creator: evt.creator.nickname,
+    creator: eventResponse.creator.nickname,
     date: dateToFinnish(date),
-    type: fromApiType(evt.type, EVENT_TYPES),
-    isoDate: evt.date,
+    type: fromApiType(eventResponse.type, EVENT_TYPES),
+    isoDate: eventResponse.date,
   }
 }
 
-const formatICalEvent = (evt: IEventExtended): ICalEvent => {
-  const date = parseISO(evt.isoDate)
+const formatICalEvent = (event: EventExtended): CalEvent => {
+  const date = parseISO(event.isoDate)
 
   return {
     date,
-    type: evt.type.id,
+    type: event.type.id,
   }
 }
 
-const toEventState = (evt: IEventResp): IEventState => {
-  const date = parseISO(evt.date)
+const toEventState = (event: EventResp): EventState => {
+  const date = parseISO(event.date)
   return {
     date,
-    description: evt.description,
+    description: event.description,
     creatorJoining: false,
-    participants: evt.participants,
-    race: evt.race,
-    subtitle: evt.subtitle,
-    time: dateToTime(date, evt.exactTime),
-    timeEnabled: !!evt.exactTime,
-    title: evt.title,
-    type: fromApiType(evt.type, EVENT_TYPES).id,
+    participants: event.participants,
+    race: event.race,
+    subtitle: event.subtitle,
+    time: dateToTime(date, event.exactTime),
+    timeEnabled: !!event.exactTime,
+    title: event.title,
+    type: fromApiType(event.type, EVENT_TYPES).id,
   }
 }
 
 const filterByDate = (
-  events: IEventExtended[],
+  events: EventExtended[],
   date?: Date
-): IEventExtended[] => {
+): EventExtended[] => {
   if (!date) {
     return events
   }
@@ -74,8 +74,8 @@ const filterByDate = (
   const start = startOfDay(date).getTime()
   const end = endOfDay(date).getTime()
 
-  const dateFilter = (e: IEventExtended): boolean => {
-    const eventDate = parseISO(e.isoDate).getTime()
+  const dateFilter = (event: EventExtended): boolean => {
+    const eventDate = parseISO(event.isoDate).getTime()
     return eventDate >= start && eventDate <= end
   }
 
@@ -98,7 +98,9 @@ const TITLES = {
   [ROUTES.register]: 'success',
 }
 
-const isEdit = pipe(defaultTo('//'), split('/'), nth(2), equals('edit'))
+type IsEdit = (value: string) => boolean
+
+const isEdit: IsEdit = pipe(defaultTo('//'), split('/'), nth(2), equals('edit'))
 
 const getPageHeader = (loc: string): string => {
   if (loc.startsWith(EVENTS_PATH)) {

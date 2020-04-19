@@ -1,19 +1,19 @@
-import React, { FunctionComponent, useState } from 'react'
+import React, { useState } from 'react'
 import Switch from 'react-switch'
 import { Box, Flex, Text } from 'rebass'
-import { IEventStep, ITime } from '../../../types'
+import { EventStep, Time } from '../../../types'
 import { LeftArrowButton, RightArrowButton } from '../../common'
 import { BaseStep } from './base-step'
 import { TimeSet } from './time-set'
 
-interface Props extends IEventStep {
-  time?: ITime
-  setTime: (time: ITime) => void
+interface Props extends EventStep {
+  time?: Time
+  setTime: (time: Time) => void
   timeEnabled: boolean
   setTimeEnabled: (timeEnable: boolean) => void
 }
 
-export const TimeStep: FunctionComponent<Props> = ({
+export const TimeStep = ({
   timeEnabled,
   setTimeEnabled,
   time,
@@ -21,7 +21,7 @@ export const TimeStep: FunctionComponent<Props> = ({
   toNextStep,
   toPrevStep,
 }: Props) => {
-  const [internalTime, setInternalTime] = useState<ITime>(
+  const [internalTime, setInternalTime] = useState<Time>(
     time || { hour: 0, minute: 0 }
   )
 

@@ -3,7 +3,7 @@ import { CaretDownCircle } from '@styled-icons/boxicons-solid/CaretDownCircle'
 import { Medal } from '@styled-icons/fa-solid/Medal'
 import parse, { DomElement, domToReact } from 'html-react-parser'
 import { map } from 'ramda'
-import React, { FunctionComponent, MouseEvent, useState } from 'react'
+import React, { MouseEvent, useState } from 'react'
 import AnimateHeight from 'react-animate-height'
 import { PortalWithState } from 'react-portal'
 import Switch from 'react-switch'
@@ -18,14 +18,14 @@ import {
 } from 'rebass/styled-components'
 import styled, { css } from 'styled-components'
 import { colors } from '../../styles/theme'
-import { ID, IEvent, ILocalUser, IUser } from '../../types'
+import { ID, Event, LocalUser, User } from '../../types'
 import { isParticipant } from '../../util/general'
 import { Button, PortalOverlay } from '../common'
 import { HeadCountButton } from './head-count-button'
 
-interface Props extends IEvent {
+interface Props extends Event {
   isJoining?: boolean
-  user?: ILocalUser
+  user?: LocalUser
   eventImage?: string
   joinEvent?: (eventId: ID) => void
   stayOpened?: boolean
@@ -104,7 +104,7 @@ const Pill = (props: FlexProps) => (
   />
 )
 
-const renderPill = (currentUser?: ILocalUser) => (participant: IUser) => {
+const renderPill = (currentUser?: LocalUser) => (participant: User) => {
   const { sub } = participant
   const userSub = currentUser ? currentUser.sub : null
   const color = sub === userSub ? 'pink' : 'blue'
@@ -124,7 +124,7 @@ const renderPill = (currentUser?: ILocalUser) => (participant: IUser) => {
   )
 }
 
-const renderLogin = (onClick?: () => void, user?: ILocalUser) => {
+const renderLogin = (onClick?: () => void, user?: LocalUser) => {
   if (user) {
     return null
   }
@@ -138,7 +138,7 @@ const renderLogin = (onClick?: () => void, user?: ILocalUser) => {
   )
 }
 
-export const EventCard: FunctionComponent<Props> = (props: Props) => {
+export const EventCard = (props: Props) => {
   const {
     address,
     id,

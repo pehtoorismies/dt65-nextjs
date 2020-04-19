@@ -5,7 +5,7 @@ import faker from 'faker'
 import { times } from 'ramda'
 import React from 'react'
 import { EVENT_TYPES } from '../../constants'
-import { IUser } from '../../types'
+import { User } from '../../types'
 import { HeadCountButton } from './head-count-button'
 import { EventCard } from '.'
 
@@ -16,7 +16,7 @@ export default {
 
 const rand = faker.random.number(EVENT_TYPES.length - 1)
 
-const createParticipant = (id: number): IUser => {
+const createParticipant = (id: number): User => {
   return {
     id: String(id),
     username: faker.internet.userName(),

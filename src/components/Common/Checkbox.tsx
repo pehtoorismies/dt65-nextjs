@@ -1,16 +1,18 @@
-import React, { FunctionComponent } from 'react'
+import React from 'react'
 import Switch from 'react-switch'
 import { Flex, Text } from 'rebass/styled-components'
 
-interface IProps {
+interface Props {
   title: string
-  onChange: any
+  onChange: (
+    checked: boolean,
+    event: React.SyntheticEvent<MouseEvent | KeyboardEvent> | MouseEvent,
+    id: string
+  ) => void
   checked: boolean
 }
 
-const Checkbox: FunctionComponent<IProps> = (props: IProps) => {
-  const { title, onChange, checked } = props
-
+const Checkbox = ({ title, onChange, checked }: Props) => {
   return (
     <Flex
       p={2}

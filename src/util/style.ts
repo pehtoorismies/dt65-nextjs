@@ -1,5 +1,5 @@
 const colorPick = () => {
-  return null;
-};
+  return null
+}
 
-export { colorPick };
+export { colorPick }

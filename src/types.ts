@@ -28,71 +28,70 @@ export enum VIEW {
   LIST = 2,
 }
 
-// tslint:disable-next-line: interface-over-type-literal
 export type ID = number | string
 
-export interface IHandleError {
+export interface HandleError {
   type: ErrorType
   message: string
 }
 
-export interface IAuthResponse {
+export interface AuthResponse {
   valid: boolean
   errorMessage?: string
 }
 
-export interface IEventTypeDescriptor {
+export interface EventTypeDescriptor {
   defaultImage: string
   title: string
   id: EventType
   apiType: string
 }
-export interface IFormProps {
+export interface FormProps {
   initialValues: any
   render: (formikBag: any) => any
   validationSchema: any
 }
 
-export interface IAuthFormProps {
+export interface AuthFormProps {
   onSubmit: (value: any, actions: any) => any
   errorMessage?: string
   children?: ReactNode
 }
 
-export interface ISubject {
+export interface Subject {
   sub: string
 }
 
-export interface IUser extends ISubject {
+export interface User extends Subject {
   id: string
   nickname: string
   __typename?: string
   username?: string
 }
 
-export interface ITime {
+export interface Time {
   hour: number
   minute: number
 }
-export interface IEventState {
+export interface EventState {
   date?: Date
   description?: string
   creatorJoining: boolean
   race?: boolean
   subtitle?: string
-  time: ITime
+  time: Time
   timeEnabled: boolean
   title?: string
   type?: EventType
-  participants?: IUser[]
+  participants?: User[]
 }
 
-export interface IEventStep {
+export interface EventStep {
   toPrevStep: any
   toNextStep: any
 }
 
-export interface IEventBase {
+export interface EventBase {
   address?: string
   description?: string
   race: boolean
@@ -100,83 +99,83 @@ export interface IEventBase {
   title: string
 }
 
-export interface IEventReq extends IEventBase {
+export interface EventReq extends EventBase {
   date: string
   type: string
   creatorJoining: boolean
   exactTime: boolean
 }
 
-export interface IEventResp extends IEventBase {
+export interface EventResp extends EventBase {
   id: ID
   date: string
   exactTime: boolean
   type: string
-  participants: IUser[]
-  creator: IUser
+  participants: User[]
+  creator: User
   updatedAt?: string
   createdAt?: string
   __typename?: string
 }
 
-export interface IEvent extends IEventBase {
+export interface Event extends EventBase {
   id: ID
   date: string
   time: string
-  participants: IUser[]
-  type: IEventTypeDescriptor
+  participants: User[]
+  type: EventTypeDescriptor
   creator: string
 }
 
-export interface IEventExtended extends IEvent {
+export interface EventExtended extends Event {
   isoDate: string
 }
 
-interface IResponse {
+interface Response {
   error?: {
     name: string
     message: string
   }
 }
 
-export interface ICreateEventResponse extends IResponse {
-  event?: IEvent
+export interface CreateEventResponse extends Response {
+  event?: Event
 }
 
-export interface IPreferences {
+export interface Preferences {
   subscribeEventCreationEmail: boolean
   subscribeWeeklyEmail: boolean
 }
 
-export interface IYearMonth {
+export interface YearMonth {
   year: number
   monthIndex: number
 }
 
-export interface ICalEvent {
+export interface CalEvent {
   date: Date
   type: EventType
 }
 
-export interface IBaseUserInfo {
+export interface BaseUserInfo {
   id: ID
   nickname: string
   name: string
   avatar?: string
 }
 
-export interface ILocalUser extends ISubject {
+export interface LocalUser extends Subject {
   __typename?: string
   nickname: string
   picture: string
   name: string
 }
 
-export interface IUserInfo extends IBaseUserInfo {
+export interface UserInfo extends BaseUserInfo {
   email: string
 }
 
-export interface IUpdateableUserInfo {
+export interface UpdateableUserInfo {
   nickname: string
   name: string
 }

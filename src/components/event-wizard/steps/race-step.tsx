@@ -1,11 +1,11 @@
-import React, { FunctionComponent } from 'react'
+import React from 'react'
 import { Button, Flex } from 'rebass'
-import { IEventStep } from '../../../types'
+import { EventStep } from '../../../types'
 import { isNullOrUndefined } from '../../../util/general'
 import { LeftArrowButton, RightArrowButton } from '../../common'
 import { BaseStep } from './base-step'
 
-interface Props extends IEventStep {
+interface Props extends EventStep {
   isRace?: boolean
   setRace(v: boolean): void
 }
@@ -30,7 +30,7 @@ const getNoVariant = (isRace?: boolean) => {
   return chooser(isRace)
 }
 
-export const RaceStep: FunctionComponent<Props> = ({
+export const RaceStep = ({
   isRace,
   setRace,
   toNextStep,

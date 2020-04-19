@@ -1,7 +1,7 @@
 import React from 'react'
-import { Flex } from 'rebass/styled-components'
+import { Flex, FlexProps } from 'rebass/styled-components'
 
-const PortalOverlay = (props: any) => (
+const PortalOverlay = (props: FlexProps) => (
   <Flex
     {...props}
     bg="moreTransparentBlack"

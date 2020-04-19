@@ -1,10 +1,10 @@
-import { isNullOrUndefined, isParticipant } from '../general';
+import { isNullOrUndefined, isParticipant } from '../general'
 
 test('is null or undefined', () => {
-  expect(isNullOrUndefined(null)).toBe(true);
-  expect(isNullOrUndefined(undefined)).toBe(true);
-  expect(isNullOrUndefined('')).toBe(false);
-});
+  expect(isNullOrUndefined(null)).toBe(true)
+  expect(isNullOrUndefined(undefined)).toBe(true)
+  expect(isNullOrUndefined('')).toBe(false)
+})
 
 test('is event participant', () => {
   const participants = [
@@ -17,7 +17,7 @@ test('is event participant', () => {
     {
       sub: '3',
     },
-  ];
+  ]
 
   expect(
     isParticipant(
@@ -26,7 +26,7 @@ test('is event participant', () => {
       },
       participants
     )
-  ).toBe(true);
+  ).toBe(true)
   expect(
     isParticipant(
       {
@@ -34,9 +34,7 @@ test('is event participant', () => {
       },
       participants
     )
-  ).toBe(true);
-  expect(isParticipant({ sub: '150' }, participants)).toBe(false);
-  expect(isParticipant({ sub: '150' }, [])).toBe(false);
-});
-
-
+  ).toBe(true)
+  expect(isParticipant({ sub: '150' }, participants)).toBe(false)
+  expect(isParticipant({ sub: '150' }, [])).toBe(false)
+})

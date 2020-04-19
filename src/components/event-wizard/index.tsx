@@ -5,17 +5,17 @@ import { PortalWithState } from 'react-portal'
 import { Box, Flex, Text } from 'rebass'
 import styled from 'styled-components'
 import { EVENT_TYPES } from '../../constants'
-import { IEventReq, IEventState } from '../../types'
+import { EventReq, EventState } from '../../types'
 import { dateToISOString, toApiType } from '../../util'
 import { Button, PortalOverlay } from '../common'
 import { StepCounter } from './step-counter'
 import { getStep } from './step-getter'
 
 interface Props {
-  applyEvent: (evt: IEventReq) => void
+  applyEvent: (evt: EventReq) => void
   nickname: string
   errorMessage?: string
-  editState?: IEventState
+  editState?: EventState
   onCancel: () => void
 }
 
@@ -49,7 +49,7 @@ export const EventWizard = ({
     creatorJoining: true,
   }
 
-  const [eventState, setEventState] = useState<IEventState>(initState)
+  const [eventState, setEventState] = useState<EventState>(initState)
 
   const create = (): void => {
     if (!eventState.date || !eventState.type || !eventState.title) {
@@ -80,7 +80,7 @@ export const EventWizard = ({
       subtitle,
     }
 
-    const event: IEventReq = mergeRight(mandatory, optional)
+    const event: EventReq = mergeRight(mandatory, optional)
 
     applyEvent(event)
   }

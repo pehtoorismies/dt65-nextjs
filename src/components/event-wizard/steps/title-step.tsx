@@ -2,11 +2,11 @@ import { Field, Form, Formik, FormikProps } from 'formik'
 import React, { FunctionComponent } from 'react'
 import { Box, Flex, Text, TextProps } from 'rebass/styled-components'
 import * as Yup from 'yup'
-import { IEventStep } from '../../../types'
+import { EventStep } from '../../../types'
 import { EventInput, LeftArrowButton, RightArrowButton } from '../../common'
 import { BaseStep } from './base-step'
 
-interface Props extends IEventStep {
+interface Props extends EventStep {
   title?: string
   subtitle?: string
   setTitles: (title?: string, subtitle?: string) => void

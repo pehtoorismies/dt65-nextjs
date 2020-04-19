@@ -1,21 +1,21 @@
-import React, { FunctionComponent } from 'react'
+import React from 'react'
 import Switch from 'react-switch'
 import { Flex, Text } from 'rebass'
 import { EVENT_TYPES } from '../../../constants'
-import { IEventState, IEventStep, ILocalUser } from '../../../types'
+import { EventState, EventStep, LocalUser } from '../../../types'
 import { dateToFinnish, fromEventType, timeToString } from '../../../util'
 import { LeftArrowButton, RightArrowButton } from '../../common'
 import { EventCard } from '../../event-card'
 import { BaseStep } from './base-step'
 
-interface Props extends IEventStep {
+interface Props extends EventStep {
   nickname: string
-  eventState: IEventState
+  eventState: EventState
   joinCreator: () => void
   isEdit: boolean
 }
 
-export const CreateStep: FunctionComponent<Props> = ({
+export const CreateStep = ({
   toPrevStep,
   toNextStep,
   nickname,
@@ -23,7 +23,7 @@ export const CreateStep: FunctionComponent<Props> = ({
   joinCreator,
   isEdit,
 }: Props) => {
-  const temporaryUser: ILocalUser = {
+  const temporaryUser: LocalUser = {
     sub: '1',
     nickname,
     picture: 'empty',

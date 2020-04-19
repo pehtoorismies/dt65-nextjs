@@ -88,7 +88,7 @@ const primaryButton = {
   },
 }
 
-const theme: any = {
+const theme = {
   breakpoints: ['40em', '52em', '64em'],
 
   buttons: {

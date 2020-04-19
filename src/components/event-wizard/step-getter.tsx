@@ -1,7 +1,7 @@
 import { assoc } from 'ramda'
 import React from 'react'
 import { EVENT_TYPES } from '../../constants'
-import { EventType, IEventState, ITime } from '../../types'
+import { EventType, EventState, Time } from '../../types'
 import { isNullOrUndefined } from '../../util/general'
 import {
   CreateStep,
@@ -26,8 +26,8 @@ const STEPS = {
 export const getStep = (
   step: number,
   setStep: (step: number) => void,
-  eventState: IEventState,
-  setEventState: (eventState: IEventState) => void,
+  eventState: EventState,
+  setEventState: (eventState: EventState) => void,
   create: () => void,
   nickname: string,
   isEdit: boolean
@@ -53,7 +53,7 @@ export const getStep = (
   const setDate = (date: Date): void => {
     setEventState(assoc('date', date, eventState))
   }
-  const setTime = (time: ITime): void => {
+  const setTime = (time: Time): void => {
     setEventState(assoc('time', time, eventState))
   }
   const setTimeEnabled = (timeEnabled: boolean): void => {

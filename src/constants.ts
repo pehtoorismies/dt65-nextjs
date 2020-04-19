@@ -12,7 +12,7 @@ import imgTriathlon from './images/events-triathlon.jpg'
 import imgUltras from './images/events-ultras.jpg'
 import imgTrailRunning from './images/events-trail-running.jpg'
 import imgNordicWalking from './images/events-nordic-walking.jpg'
-import { EventType, IEventTypeDescriptor } from './types'
+import { EventType, EventTypeDescriptor } from './types'
 
 const FI_LOCAL = {
   months: [
@@ -46,7 +46,7 @@ const FI_LOCAL = {
   },
 }
 
-const EVENT_TYPES: IEventTypeDescriptor[] = [
+const EVENT_TYPES: EventTypeDescriptor[] = [
   {
     defaultImage: imgCycling,
     title: 'Pyöräily',

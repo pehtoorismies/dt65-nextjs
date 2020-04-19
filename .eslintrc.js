@@ -8,7 +8,7 @@ module.exports = {
     'plugin:import/warnings',
     'plugin:import/recommended',
     'plugin:import/typescript',
-    'plugin:react/recommended'
+    'plugin:react/recommended',
   ],
   parserOptions: {
     ecmaVersion: 2018,
@@ -41,6 +41,6 @@ module.exports = {
         },
       },
     ],
-    'no-console': 'error',
+    'no-console': ['error', { allow: ['warn', 'error'] }],
   },
 }

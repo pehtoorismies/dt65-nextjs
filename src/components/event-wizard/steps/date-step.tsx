@@ -1,17 +1,17 @@
 import dateFnsFormat from 'date-fns/format'
 import isAfter from 'date-fns/isAfter'
 import startOfToday from 'date-fns/startOfToday'
-import React, { Fragment, FunctionComponent } from 'react'
+import React, { Fragment } from 'react'
 import DayPicker from 'react-day-picker'
 import 'react-day-picker/lib/style.css'
 import { Flex, Text } from 'rebass'
 import { FI_LOCAL } from '../../../constants'
-import { IEventStep } from '../../../types'
+import { EventStep } from '../../../types'
 import { isNullOrUndefined } from '../../../util/general'
 import { LeftArrowButton, RightArrowButton } from '../../common'
 import { BaseStep } from './base-step'
 
-interface Props extends IEventStep {
+interface Props extends EventStep {
   date?: Date
   setDate: (date: Date) => void
 }
@@ -23,12 +23,7 @@ const formatDate = (date?: Date): string => {
   return dateFnsFormat(date, 'dd.MM.yyyy')
 }
 
-export const DateStep: FunctionComponent<Props> = ({
-  date,
-  toNextStep,
-  toPrevStep,
-  setDate,
-}: Props) => {
+export const DateStep = ({ date, toNextStep, toPrevStep, setDate }: Props) => {
   const handleDayClick = (selectedDay: Date) => {
     if (isAfter(startOfToday(), selectedDay)) {
       return
