@@ -1,9 +1,9 @@
 import { withA11y } from '@storybook/addon-a11y'
 import { action } from '@storybook/addon-actions'
-import { boolean, number, text, withKnobs } from '@storybook/addon-knobs'
+import { withKnobs } from '@storybook/addon-knobs'
+import faker from 'faker'
 import React from 'react'
 import ShowError from '.'
-import faker from 'faker'
 
 export default {
   title: 'ShowError',
