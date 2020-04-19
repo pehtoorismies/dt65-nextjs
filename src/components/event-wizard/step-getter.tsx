@@ -1,15 +1,17 @@
-import React from 'react'
 import { assoc } from 'ramda'
-import { TypeStep } from './steps/TypeStep'
-import { RaceStep } from './steps/RaceStep'
-import { TitleStep } from './steps/TitleStep'
-import { DateStep } from './steps/DateStep'
-import { TimeStep } from './steps/TimeStep'
-import { CreateStep } from './steps/CreateStep'
-import { DescriptionStep } from './steps/DescriptionStep'
+import React from 'react'
 import { EVENT_TYPES } from '../../constants'
+import { EventType, IEventState, ITime } from '../../types'
 import { isNullOrUndefined } from '../../util/general'
-import { IEventState, ITime, EventType } from '../../types'
+import {
+  CreateStep,
+  DateStep,
+  DescriptionStep,
+  RaceStep,
+  TimeStep,
+  TitleStep,
+  TypeStep,
+} from './steps'
 
 const STEPS = {
   TYPE: 0,
@@ -23,7 +25,7 @@ const STEPS = {
 
 export const getStep = (
   step: number,
-  setStep: any,
+  setStep: (step: number) => void,
   eventState: IEventState,
   setEventState: (eventState: IEventState) => void,
   create: () => void,
@@ -69,7 +71,7 @@ export const getStep = (
   const toNext = (currentStep: number) => () => {
     setStep(currentStep + 1)
   }
-  const toPrev = (currentStep: number) => () => {
+  const toPrevious = (currentStep: number) => () => {
     setStep(currentStep - 1)
   }
 
@@ -80,7 +82,7 @@ export const getStep = (
         selectedType={eventState.type}
         types={EVENT_TYPES}
         toNextStep={toNext(STEPS.TYPE)}
-        toPrevStep={toPrev(STEPS.TYPE)}
+        toPrevStep={toPrevious(STEPS.TYPE)}
       />
     )
   }
@@ -91,7 +93,7 @@ export const getStep = (
         isRace={eventState.race}
         setRace={setRace}
         toNextStep={toNext(STEPS.RACE)}
-        toPrevStep={toPrev(STEPS.RACE)}
+        toPrevStep={toPrevious(STEPS.RACE)}
       />
     )
   }
@@ -102,7 +104,7 @@ export const getStep = (
         subtitle={eventState.subtitle}
         setTitles={setTitles}
         toNextStep={toNext(STEPS.TITLE)}
-        toPrevStep={toPrev(STEPS.TITLE)}
+        toPrevStep={toPrevious(STEPS.TITLE)}
       />
     )
   }
@@ -113,7 +115,7 @@ export const getStep = (
         date={eventState.date}
         setDate={setDate}
         toNextStep={toNext(STEPS.DATE)}
-        toPrevStep={toPrev(STEPS.DATE)}
+        toPrevStep={toPrevious(STEPS.DATE)}
       />
     )
   }
@@ -126,7 +128,7 @@ export const getStep = (
         timeEnabled={eventState.timeEnabled}
         setTimeEnabled={setTimeEnabled}
         toNextStep={toNext(STEPS.TIME)}
-        toPrevStep={toPrev(STEPS.TIME)}
+        toPrevStep={toPrevious(STEPS.TIME)}
       />
     )
   }
@@ -137,7 +139,7 @@ export const getStep = (
         description={eventState.description}
         setDescription={setDescription}
         toNextStep={toNext(STEPS.DESCRIPTION)}
-        toPrevStep={toPrev(STEPS.DESCRIPTION)}
+        toPrevStep={toPrevious(STEPS.DESCRIPTION)}
       />
     )
   }
@@ -149,7 +151,7 @@ export const getStep = (
         nickname={nickname}
         eventState={eventState}
         toNextStep={create}
-        toPrevStep={toPrev(STEPS.PREVIEW)}
+        toPrevStep={toPrevious(STEPS.PREVIEW)}
         isEdit={isEdit}
       />
     )

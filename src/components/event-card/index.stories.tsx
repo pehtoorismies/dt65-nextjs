@@ -6,8 +6,8 @@ import { times } from 'ramda'
 import React from 'react'
 import { EVENT_TYPES } from '../../constants'
 import { IUser } from '../../types'
-import EventCard from './'
-import HeadCountButton from './head-count-button'
+import { HeadCountButton } from './head-count-button'
+import { EventCard } from '.'
 
 export default {
   title: 'EventCard',

@@ -2,12 +2,12 @@ import { map, prop, sortBy } from 'ramda'
 import React, { FunctionComponent } from 'react'
 import { Button, Flex } from 'rebass'
 import { EventType, IEventStep, IEventTypeDescriptor } from '../../../types'
-import { RightArrowButton } from '../../Common'
-import { BaseStep } from './BaseStep'
+import { RightArrowButton } from '../../common'
+import { BaseStep } from './base-step'
 
 const sortByTitle = sortBy(prop('title'))
 
-interface IProps extends IEventStep {
+interface Props extends IEventStep {
   selectedType?: EventType
   types: IEventTypeDescriptor[]
   setSelectedType: OnSelectType
@@ -40,9 +40,12 @@ const renderTypeButton = (
   )
 }
 
-export const TypeStep: FunctionComponent<IProps> = (props: IProps) => {
-  const { selectedType, types, setSelectedType, toNextStep } = props
-
+export const TypeStep: FunctionComponent<Props> = ({
+  selectedType,
+  types,
+  setSelectedType,
+  toNextStep,
+}: Props) => {
   const ordered = sortByTitle(types)
   const typeRender = renderTypeButton(setSelectedType, selectedType)
   return (

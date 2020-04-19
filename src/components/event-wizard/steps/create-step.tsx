@@ -4,28 +4,26 @@ import { Flex, Text } from 'rebass'
 import { EVENT_TYPES } from '../../../constants'
 import { IEventState, IEventStep, ILocalUser } from '../../../types'
 import { dateToFinnish, fromEventType, timeToString } from '../../../util'
-import { LeftArrowButton, RightArrowButton } from '../../Common'
-import EventCard from '../../EventCard'
-import { BaseStep } from './BaseStep'
+import { LeftArrowButton, RightArrowButton } from '../../common'
+import { EventCard } from '../../event-card'
+import { BaseStep } from './base-step'
 
-interface IProps extends IEventStep {
+interface Props extends IEventStep {
   nickname: string
   eventState: IEventState
   joinCreator: () => void
   isEdit: boolean
 }
 
-export const CreateStep: FunctionComponent<IProps> = (props: IProps) => {
-  const {
-    toPrevStep,
-    toNextStep,
-    nickname,
-    eventState,
-    joinCreator,
-    isEdit,
-  } = props
-
-  const tmpUser: ILocalUser = {
+export const CreateStep: FunctionComponent<Props> = ({
+  toPrevStep,
+  toNextStep,
+  nickname,
+  eventState,
+  joinCreator,
+  isEdit,
+}: Props) => {
+  const temporaryUser: ILocalUser = {
     sub: '1',
     nickname,
     picture: 'empty',
@@ -68,8 +66,8 @@ export const CreateStep: FunctionComponent<IProps> = (props: IProps) => {
         <EventCard
           stayOpened={true}
           {...previewEvent}
-          user={tmpUser}
-          creator={tmpUser.nickname}
+          user={temporaryUser}
+          creator={temporaryUser.nickname}
         />
         {iamJoining}
       </Flex>

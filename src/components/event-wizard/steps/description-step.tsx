@@ -3,10 +3,10 @@ import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 import { Box, Flex } from 'rebass'
 import { IEventStep } from '../../../types'
-import { LeftArrowButton, RightArrowButton } from '../../Common'
-import { BaseStep } from './BaseStep'
+import { LeftArrowButton, RightArrowButton } from '../../common'
+import { BaseStep } from './base-step'
 
-interface IProps extends IEventStep {
+interface Props extends IEventStep {
   description?: string
   setDescription: (description: string) => void
 }
@@ -42,9 +42,12 @@ const formats = [
   'video',
 ]
 
-export const DescriptionStep: FunctionComponent<IProps> = (props: IProps) => {
-  const { toPrevStep, toNextStep, setDescription, description } = props
-
+export const DescriptionStep: FunctionComponent<Props> = ({
+  toPrevStep,
+  toNextStep,
+  setDescription,
+  description,
+}: Props) => {
   const [editorState, setEditorState] = useState(description || '')
 
   const toNext = () => {
@@ -52,8 +55,8 @@ export const DescriptionStep: FunctionComponent<IProps> = (props: IProps) => {
     toNextStep()
   }
 
-  const handleChange = (val: any) => {
-    setEditorState(val)
+  const handleChange = (value: string) => {
+    setEditorState(value)
   }
 
   return (

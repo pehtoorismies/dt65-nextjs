@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const BigInput = styled.input`
+export const BigInput = styled.input`
   width: 100%;
   height: ${(props) => props.size}px;
   padding: 5px;
@@ -24,5 +24,3 @@ const BigInput = styled.input`
 BigInput.defaultProps = {
   size: 30,
 }
-
-export default BigInput

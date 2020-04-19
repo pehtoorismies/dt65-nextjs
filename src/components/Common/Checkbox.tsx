@@ -19,7 +19,7 @@ const Checkbox: FunctionComponent<IProps> = (props: IProps) => {
       justifyContent="space-between"
       width="100%"
     >
-      <Text fontWeight="bold" color={checked ? 'black' : 'grey'}>
+      <Text fontWeight="600" color={checked ? 'black' : 'grey'}>
         {title}
       </Text>
       <Switch onChange={onChange} checked={checked} />

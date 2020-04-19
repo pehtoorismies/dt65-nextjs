@@ -1,17 +1,17 @@
-import React, { FunctionComponent, Fragment } from 'react'
-import { Flex, Text } from 'rebass'
+import dateFnsFormat from 'date-fns/format'
+import isAfter from 'date-fns/isAfter'
+import startOfToday from 'date-fns/startOfToday'
+import React, { Fragment, FunctionComponent } from 'react'
 import DayPicker from 'react-day-picker'
 import 'react-day-picker/lib/style.css'
-import dateFnsFormat from 'date-fns/format'
-import startOfToday from 'date-fns/startOfToday'
-import isAfter from 'date-fns/isAfter'
-import { BaseStep } from './BaseStep'
-import { RightArrowButton, LeftArrowButton } from '../../Common'
-import { isNullOrUndefined } from '../../../util/general'
+import { Flex, Text } from 'rebass'
 import { FI_LOCAL } from '../../../constants'
 import { IEventStep } from '../../../types'
+import { isNullOrUndefined } from '../../../util/general'
+import { LeftArrowButton, RightArrowButton } from '../../common'
+import { BaseStep } from './base-step'
 
-interface IProps extends IEventStep {
+interface Props extends IEventStep {
   date?: Date
   setDate: (date: Date) => void
 }
@@ -23,9 +23,12 @@ const formatDate = (date?: Date): string => {
   return dateFnsFormat(date, 'dd.MM.yyyy')
 }
 
-export const DateStep: FunctionComponent<IProps> = (props: IProps) => {
-  const { date, toNextStep, toPrevStep, setDate } = props
-
+export const DateStep: FunctionComponent<Props> = ({
+  date,
+  toNextStep,
+  toPrevStep,
+  setDate,
+}: Props) => {
   const handleDayClick = (selectedDay: Date) => {
     if (isAfter(startOfToday(), selectedDay)) {
       return
@@ -45,7 +48,7 @@ export const DateStep: FunctionComponent<IProps> = (props: IProps) => {
         >
           <Text p={2}>Klikkaa haluamasi päivämäärä</Text>
           <Text
-            fontWeight="bold"
+            fontWeight="600"
             width={250}
             textAlign="center"
             p={2}

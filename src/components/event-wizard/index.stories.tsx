@@ -4,16 +4,18 @@ import { boolean, number, text, withKnobs } from '@storybook/addon-knobs'
 import React from 'react'
 import { EVENT_TYPES } from '../../constants'
 import { IEventState } from '../../types'
-import EventWizard from './'
-import StepCounter from './step-counter'
-import { CreateStep } from './steps/CreateStep'
-import { DateStep } from './steps/DateStep'
-import { DescriptionStep } from './steps/DescriptionStep'
-import { RaceStep } from './steps/RaceStep'
-import { TimeStep } from './steps/TimeStep'
-import { TitleStep } from './steps/TitleStep'
-import { TypeStep } from './steps/TypeStep'
+import { StepCounter } from './step-counter'
+import {
+  CreateStep,
+  DateStep,
+  DescriptionStep,
+  RaceStep,
+  TimeStep,
+  TitleStep,
+  TypeStep,
+} from './steps'
 import { TimeSet } from './steps/time-set'
+import { EventWizard } from '.'
 
 export default {
   title: 'EventWizard',

@@ -1,28 +1,26 @@
 import React, { FunctionComponent, useState } from 'react'
-import { Box, Flex, Text } from 'rebass'
 import Switch from 'react-switch'
-import { BaseStep } from './BaseStep'
-import { RightArrowButton, LeftArrowButton } from '../../Common'
+import { Box, Flex, Text } from 'rebass'
 import { IEventStep, ITime } from '../../../types'
+import { LeftArrowButton, RightArrowButton } from '../../common'
+import { BaseStep } from './base-step'
 import { TimeSet } from './time-set'
 
-interface IProps extends IEventStep {
+interface Props extends IEventStep {
   time?: ITime
   setTime: (time: ITime) => void
   timeEnabled: boolean
   setTimeEnabled: (timeEnable: boolean) => void
 }
 
-export const TimeStep: FunctionComponent<IProps> = (props: IProps) => {
-  const {
-    timeEnabled,
-    setTimeEnabled,
-    time,
-    setTime,
-    toNextStep,
-    toPrevStep,
-  } = props
-
+export const TimeStep: FunctionComponent<Props> = ({
+  timeEnabled,
+  setTimeEnabled,
+  time,
+  setTime,
+  toNextStep,
+  toPrevStep,
+}: Props) => {
   const [internalTime, setInternalTime] = useState<ITime>(
     time || { hour: 0, minute: 0 }
   )
@@ -31,7 +29,7 @@ export const TimeStep: FunctionComponent<IProps> = (props: IProps) => {
     setTime(internalTime)
     toNextStep()
   }
-  const onPrev = () => {
+  const onPrevious = () => {
     setTime(internalTime)
     toPrevStep()
   }
@@ -42,8 +40,8 @@ export const TimeStep: FunctionComponent<IProps> = (props: IProps) => {
         <Text p={2}>Tapahtumalla tietty alkamisaika</Text>
         <Box my={2}>
           <Switch
-            onChange={(val: boolean) => {
-              setTimeEnabled(val)
+            onChange={(value: boolean) => {
+              setTimeEnabled(value)
             }}
             checked={timeEnabled}
           />
@@ -64,7 +62,7 @@ export const TimeStep: FunctionComponent<IProps> = (props: IProps) => {
         alignItems="center"
         justifyContent="space-between"
       >
-        <LeftArrowButton onClick={onPrev} visible={true} />
+        <LeftArrowButton onClick={onPrevious} visible={true} />
         <RightArrowButton onClick={onNext} visible={true} />
       </Flex>
     </BaseStep>

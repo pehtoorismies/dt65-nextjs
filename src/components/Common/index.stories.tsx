@@ -3,7 +3,7 @@ import { action } from '@storybook/addon-actions'
 import { boolean, select, withKnobs } from '@storybook/addon-knobs'
 import { User } from '@styled-icons/boxicons-regular/User'
 import React from 'react'
-import { ArrowButton, Button, Checkbox, ErrorText } from './'
+import { ArrowButton, Button, Checkbox, ErrorText } from '.'
 
 export default {
   title: 'Components',
@@ -24,7 +24,7 @@ export const button = () => (
     disabled={boolean('disabled', false)}
     isLoading={boolean('isLoading', false)}
   >
-    I'm Button
+    I&apos;m Button
   </Button>
 )
 

@@ -1,24 +1,24 @@
 import { Field, Form, Formik, FormikProps } from 'formik'
 import React, { FunctionComponent } from 'react'
-import { Box, Flex, Text } from 'rebass'
+import { Box, Flex, Text, TextProps } from 'rebass/styled-components'
 import * as Yup from 'yup'
 import { IEventStep } from '../../../types'
-import { EventInput, LeftArrowButton, RightArrowButton } from '../../Common'
-import { BaseStep } from './BaseStep'
+import { EventInput, LeftArrowButton, RightArrowButton } from '../../common'
+import { BaseStep } from './base-step'
 
-interface IProps extends IEventStep {
+interface Props extends IEventStep {
   title?: string
   subtitle?: string
   setTitles: (title?: string, subtitle?: string) => void
 }
 
-interface ITitleFormValues {
+interface TitleFormValues {
   title?: string
   subtitle?: string
 }
 
-const HintText = (props: any) => (
-  <Text {...props} fontSize={1} mb={1} fontFamily="monospace" />
+const HintText = (props: TextProps) => (
+  <Text {...props} fontSize={1} mb={1} fontFamily="monospace" css="" />
 )
 
 const validationSchema = Yup.object().shape({
@@ -41,17 +41,23 @@ const validationSchema = Yup.object().shape({
     }),
 })
 
-export const TitleStep: FunctionComponent<IProps> = (props: IProps) => {
-  const { title, subtitle, setTitles, toPrevStep, toNextStep } = props
-
-  const onSubmit = (values: ITitleFormValues) => {
+export const TitleStep: FunctionComponent<Props> = ({
+  title,
+  subtitle,
+  setTitles,
+  toPrevStep,
+  toNextStep,
+}: Props) => {
+  const onSubmit = (values: TitleFormValues) => {
     setTitles(values.title, values.subtitle)
     toNextStep()
   }
 
-  const renderForm = (formikBag: FormikProps<ITitleFormValues>) => {
-    const { isValid, values, submitForm } = formikBag
-
+  const renderForm = ({
+    isValid,
+    values,
+    submitForm,
+  }: FormikProps<TitleFormValues>) => {
     const onLeftClick = () => {
       setTitles(values.title, values.subtitle)
       toPrevStep()
@@ -85,11 +91,11 @@ export const TitleStep: FunctionComponent<IProps> = (props: IProps) => {
           >
             <HintText>Esimerkki</HintText>
             <Flex>
-              <HintText fontWeight="bold">Nimi:</HintText>
+              <HintText fontWeight="600">Nimi:</HintText>
               <HintText>Tempoajo </HintText>
             </Flex>
             <Flex>
-              <HintText fontWeight="bold">Tarkenne:</HintText>
+              <HintText fontWeight="600">Tarkenne:</HintText>
               <HintText>Seuran mestaruus </HintText>
             </Flex>
           </Box>

@@ -1,38 +1,37 @@
 import * as React from 'react'
-import { Text } from 'rebass/styled-components'
+import { Text, TextProps } from 'rebass/styled-components'
+import { ArrowButton, LeftArrowButton, RightArrowButton } from './arrow-button'
+import { BasicInput } from './basic-input'
+import { BigInput } from './big-input'
+import { Button } from './button'
+import Checkbox from './checkbox'
+import EventInput from './event-input'
+import PortalOverlay from './portal-overlay'
 
-import ArrowButton from './ArrowButton'
-import BasicInput from './BasicInput'
-import BigInput from './BigInput'
-import Button from './Button'
-import Checkbox from './Checkbox'
-import EventInput from './EventInput'
-import LeftArrowButton from './LeftArrowButton'
-import PortalOverlay from './PortalOverlay'
-import RightArrowButton from './RightArrowButton'
-
-const ErrorText = (props: any) => (
+const ErrorText = (props: TextProps) => (
   <Text
     {...props}
     sx={{
       color: 'red',
       fontSize: '12px',
-      fontWeight: 'bold',
+      fontWeight: '600',
       height: '15px',
       width: '100%',
     }}
+    css=""
   />
 )
 
-const TextLink = (props: any) => (
+const TextLink = (props: TextProps) => (
   <Text
     {...props}
     sx={{
       color: 'lightgray',
       cursor: 'pointer',
-      fontWeight: 700,
+      fontWeight: 600,
       userSelect: 'none',
     }}
+    css=""
   />
 )
 

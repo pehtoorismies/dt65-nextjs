@@ -48,7 +48,7 @@ const NumberDisplay = (props: any) => (
   <Text
     {...props}
     fontSize={50}
-    fontWeight="bold"
+    fontWeight="600"
     fontFamily="monospace"
     width={BOX_WIDTH * 2}
     textAlign="center"

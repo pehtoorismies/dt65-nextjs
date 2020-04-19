@@ -38,7 +38,7 @@ const primaryForm = {
 
   '&::placeholder': {
     color: 'lightgray',
-    fontWeight: 'bold',
+    fontWeight: 600,
   },
 }
 const primaryFormError = {
@@ -59,7 +59,7 @@ const eventForm = {
 
   '&::placeholder': {
     color: 'lightgray',
-    fontWeight: 'bold',
+    fontWeight: 600,
   },
 }
 
@@ -73,7 +73,7 @@ const primaryButton = {
   backgroundColor: pink,
   color: white,
   textTransform: 'uppercase',
-  fontWeight: 'bold',
+  fontWeight: 600,
   '&[disabled]': {
     backgroundColor: lightPink,
     cursor: 'not-allowed',

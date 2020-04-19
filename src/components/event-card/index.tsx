@@ -3,20 +3,27 @@ import { CaretDownCircle } from '@styled-icons/boxicons-solid/CaretDownCircle'
 import { Medal } from '@styled-icons/fa-solid/Medal'
 import parse, { DomElement, domToReact } from 'html-react-parser'
 import { map } from 'ramda'
-import React, { FunctionComponent, useState } from 'react'
+import React, { FunctionComponent, MouseEvent, useState } from 'react'
 import AnimateHeight from 'react-animate-height'
 import { PortalWithState } from 'react-portal'
 import Switch from 'react-switch'
 import { toast } from 'react-toastify'
-import { Box, Card, Flex, Heading, Text } from 'rebass/styled-components'
+import {
+  Box,
+  Card,
+  Flex,
+  FlexProps,
+  Heading,
+  Text,
+} from 'rebass/styled-components'
 import styled, { css } from 'styled-components'
 import { colors } from '../../styles/theme'
 import { ID, IEvent, ILocalUser, IUser } from '../../types'
 import { isParticipant } from '../../util/general'
-import { Button, PortalOverlay } from '../Common'
-import HeadCountButton from './head-count-button'
+import { Button, PortalOverlay } from '../common'
+import { HeadCountButton } from './head-count-button'
 
-interface IProps extends IEvent {
+interface Props extends IEvent {
   isJoining?: boolean
   user?: ILocalUser
   eventImage?: string
@@ -32,18 +39,18 @@ const ANIM_TIME = 500
 
 const borderStyle = '1px solid #e9e9e9'
 
-interface IBoxProps {
+interface ImageBoxProps {
   bgImage: string
 }
 
-const ImageBox = styled.div<IBoxProps>`
+const ImageBox = styled.div<ImageBoxProps>`
   display: grid;
   background-size: cover;
   border-radius: 15px 15px 0 0;
-  font-weight: bold;
+  font-weight: 700;
   height: 150px;
   width: 100%;
-  background-image: url(${(props: IBoxProps) => props.bgImage});
+  background-image: url(${(props: ImageBoxProps) => props.bgImage});
   grid-template-rows: 30px auto 20px;
   justify-items: center;
   align-items: center;
@@ -68,31 +75,32 @@ const common = css`
   }
 `
 
-const EditBtn = styled(Edit)`
+const EditButton = styled(Edit)`
   ${common};
 `
 
-interface IArrowProps {
+interface ArrowProps {
   pointDown: boolean
 }
 
-const DownArrow = styled(CaretDownCircle)<IArrowProps>`
+const DownArrow = styled(CaretDownCircle)<ArrowProps>`
   ${common};
   margin-left: 3px;
   margin-right: 10px;
   transform: rotate(
-    ${(props: IArrowProps) => (props.pointDown ? '0' : '180deg')}
+    ${(props: ArrowProps) => (props.pointDown ? '0' : '180deg')}
   );
   transition: transform ${ANIM_TIME}ms ease;
 `
 
-const Pill = (props: any) => (
+const Pill = (props: FlexProps) => (
   <Flex
     {...props}
     margin="2px"
     sx={{
       borderRadius: '4px',
     }}
+    css=""
   />
 )
 
@@ -130,7 +138,7 @@ const renderLogin = (onClick?: () => void, user?: ILocalUser) => {
   )
 }
 
-const EventCard: FunctionComponent<IProps> = (props: IProps) => {
+export const EventCard: FunctionComponent<Props> = (props: Props) => {
   const {
     address,
     id,
@@ -154,22 +162,25 @@ const EventCard: FunctionComponent<IProps> = (props: IProps) => {
     onGotoLogin,
   } = props
 
+  const [showDetails, setShowDetails] = useState(stayOpened)
+  const [disableDelete, setDisableDelete] = useState(true)
+
   const userGoesToEvent = user ? isParticipant(user, participants) : false
 
-  const onJoinClick = (e: any) => {
+  const onJoinClick = (event: MouseEvent<HTMLButtonElement>) => {
     if (!user) {
       toast.info('Et ole kirjautunut sisään')
       return
     }
-    e.stopPropagation()
+    event.stopPropagation()
     if (joinEvent) {
       joinEvent(id)
     }
   }
-  const raceElem = race ? <Race /> : null
+  const raceElement = race ? <Race /> : null
 
-  const exposeDetails = (e: any) => {
-    e.stopPropagation()
+  const exposeDetails = (event: MouseEvent<{}>) => {
+    event.stopPropagation()
     if (!stayOpened) {
       setShowDetails(!showDetails)
     }
@@ -180,9 +191,6 @@ const EventCard: FunctionComponent<IProps> = (props: IProps) => {
       onViewClick(id)
     }
   }
-
-  const [showDetails, setShowDetails] = useState(stayOpened)
-  const [disableDelete, setDisableDelete] = useState(true)
 
   const toggleOpenButton = !stayOpened ? (
     <DownArrow pointDown={!showDetails} onClick={exposeDetails} />
@@ -236,7 +244,7 @@ const EventCard: FunctionComponent<IProps> = (props: IProps) => {
                     }}
                   >
                     <Flex ml={2}>{toggleOpenButton}</Flex>
-                    <EditBtn onClick={openPortal} />
+                    <EditButton onClick={openPortal} />
                   </Flex>
 
                   <Flex
@@ -255,7 +263,7 @@ const EventCard: FunctionComponent<IProps> = (props: IProps) => {
                     >
                       {type.title}
                     </Text>
-                    {raceElem}
+                    {raceElement}
                   </Flex>
 
                   <Text
@@ -285,10 +293,10 @@ const EventCard: FunctionComponent<IProps> = (props: IProps) => {
                   }}
                 >
                   <Flex justifyContent="space-around" flexDirection="column">
-                    <Text fontSize={20} fontWeight="bold">
+                    <Text fontSize={20} fontWeight="600">
                       {title}
                     </Text>
-                    <Text fontSize={16} fontWeight="bold">
+                    <Text fontSize={16} fontWeight="600">
                       {subtitle}
                     </Text>
                     <Text mt={1} fontSize={16}>
@@ -318,7 +326,7 @@ const EventCard: FunctionComponent<IProps> = (props: IProps) => {
                     }}
                   >
                     <Flex>
-                      <Text fontWeight="bold" color="lightBlack" width={60}>
+                      <Text fontWeight="600" color="lightBlack" width={60}>
                         Sijainti:
                       </Text>
                       <Text ml={1} color={address ? 'black' : 'lightgrey'}>
@@ -326,7 +334,7 @@ const EventCard: FunctionComponent<IProps> = (props: IProps) => {
                       </Text>
                     </Flex>
                     <Flex my={1}>
-                      <Text fontWeight="bold" color="lightBlack" width={60}>
+                      <Text fontWeight="600" color="lightBlack" width={60}>
                         Aika:
                       </Text>
                       <Text ml={1} color={time ? 'black' : 'lightgrey'}>
@@ -336,7 +344,7 @@ const EventCard: FunctionComponent<IProps> = (props: IProps) => {
                     <Flex flexWrap="wrap" py={1}>
                       {map(renderPill(user), participants)}
                     </Flex>
-                    <Text fontWeight="bold" color="lightBlack" width={60}>
+                    <Text fontWeight="600" color="lightBlack" width={60}>
                       Kuvaus:
                     </Text>
                     <Text
@@ -345,10 +353,12 @@ const EventCard: FunctionComponent<IProps> = (props: IProps) => {
                       color={description ? 'black' : 'lightgrey'}
                     >
                       {parse(description || 'ei määritelty', {
-                        replace: (domNode: DomElement): any => {
+                        replace: (
+                          domNode: DomElement
+                        ): false | void | object | Element => {
                           const { name, children } = domNode
                           if (!children) {
-                            return ''
+                            return <Text />
                           }
 
                           if (name === 'em') {
@@ -360,7 +370,7 @@ const EventCard: FunctionComponent<IProps> = (props: IProps) => {
                           }
                           if (name === 'strong') {
                             return (
-                              <Text as="span" fontWeight="bold">
+                              <Text as="span" fontWeight="600">
                                 {domToReact(children)}
                               </Text>
                             )
@@ -403,8 +413,7 @@ const EventCard: FunctionComponent<IProps> = (props: IProps) => {
             {portal(
               <PortalOverlay onClick={closePortal}>
                 <Flex
-                  // tslint:disable-next-line: jsx-no-lambda
-                  onClick={(e) => e.stopPropagation()}
+                  onClick={(event) => event.stopPropagation()}
                   width="80%"
                   sx={{
                     borderRadius: '10px',
@@ -461,5 +470,3 @@ const EventCard: FunctionComponent<IProps> = (props: IProps) => {
     </PortalWithState>
   )
 }
-
-export default EventCard

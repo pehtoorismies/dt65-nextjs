@@ -4,6 +4,7 @@ import reset from 'styled-reset'
 export const GlobalStyle = createGlobalStyle`
   ${reset}
   
+  /* titillium-web-regular - latin */
   @font-face {
     font-family: 'Titillium Web';
     font-style: normal;
@@ -29,13 +30,27 @@ export const GlobalStyle = createGlobalStyle`
          url('/fonts/titillium-web-v8-latin-600.ttf') format('truetype'), /* Safari, Android, iOS */
          url('/fonts/titillium-web-v8-latin-600.svg#TitilliumWeb') format('svg'); /* Legacy iOS */
   }
+  /* titillium-web-900 - latin */
+  @font-face {
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 900;
+    src: url('/fonts/titillium-web-v8-latin-900.eot'); /* IE9 Compat Modes */
+    src: local('Titillium Web Black'), local('TitilliumWeb-Black'),
+         url('/fonts/titillium-web-v8-latin-900.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('/fonts/titillium-web-v8-latin-900.woff2') format('woff2'), /* Super Modern Browsers */
+         url('/fonts/titillium-web-v8-latin-900.woff') format('woff'), /* Modern Browsers */
+         url('/fonts/titillium-web-v8-latin-900.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('/fonts/titillium-web-v8-latin-900.svg#TitilliumWeb') format('svg'); /* Legacy iOS */
+  }
   html {
     font-size: 10px;
   }
   body {
     height: 100%;
     font-family: 'Titillium Web', sans-serif;
-    background-color: white;  
+    background-color: white;
+    font-size: 1.6rem;
   }
   p {
   line-height: 1.3;
@@ -44,7 +59,7 @@ export const GlobalStyle = createGlobalStyle`
     min-height: 250px;
   }
   .ql-editor strong {
-    font-weight:bold;
+    font-weight: 600;
   }
   .ql-editor em {
     font-style: italic;

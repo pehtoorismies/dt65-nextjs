@@ -5,33 +5,30 @@ import { Dash } from '@styled-icons/octicons/Dash'
 import { flatten, intersperse, map, repeat } from 'ramda'
 import React, { FunctionComponent } from 'react'
 import { Box, Text } from 'rebass'
-import styled, { withTheme } from 'styled-components'
+import styled from 'styled-components'
 import uuidv4 from 'uuid/v4'
-
-// @ts-ignore - hack
-const getPink = (theme) => theme.colors.pink
+import { colors } from '../../styles/theme'
 
 const EmptyCircle = styled(Circle)`
-  color: ${(props) => getPink(props.theme)};
+  color: ${colors.pink};
   width: 20px;
 `
 const CurrentCircle = styled(HelpCircle)`
-  color: ${(props) => getPink(props.theme)};
+  color: ${colors.pink};
   width: 20px;
 `
 const CheckedCircle = styled(CheckCircle)`
-  color: ${(props) => getPink(props.theme)};
+  color: ${colors.pink};
   width: 20px;
 `
 const Connector = styled(Dash)`
-  color: ${(props) => getPink(props.theme)};
+  color: ${colors.pink};
   width: 15px;
 `
 
-interface IProps {
+interface Props {
   total: number
   completed: number
-  theme?: any //TODO: hack
 }
 
 enum Element {
@@ -56,9 +53,10 @@ const getElement = (ele: Element) => {
   }
 }
 
-const StepCounter: FunctionComponent<IProps> = (props: IProps) => {
-  const { total, completed } = props
-
+export const StepCounter: FunctionComponent<Props> = ({
+  total,
+  completed,
+}: Props) => {
   const uncompleted = total - completed - 1 >= 0 ? total - completed - 1 : 0
 
   const completedElems = repeat(Element.Checked, completed)
@@ -75,5 +73,3 @@ const StepCounter: FunctionComponent<IProps> = (props: IProps) => {
     </Box>
   )
 }
-
-export default withTheme(StepCounter)

@@ -1,17 +1,17 @@
 import { CancelCircle } from '@styled-icons/icomoon/CancelCircle'
 import { mergeRight } from 'ramda'
-import React, { FunctionComponent, useState } from 'react'
+import React, { useState } from 'react'
 import { PortalWithState } from 'react-portal'
 import { Box, Flex, Text } from 'rebass'
-import styled, { withTheme } from 'styled-components'
+import styled from 'styled-components'
 import { EVENT_TYPES } from '../../constants'
 import { IEventReq, IEventState } from '../../types'
 import { dateToISOString, toApiType } from '../../util'
-import { Button, PortalOverlay } from '../Common'
-import StepCounter from './step-counter'
+import { Button, PortalOverlay } from '../common'
+import { StepCounter } from './step-counter'
 import { getStep } from './step-getter'
 
-interface IProps {
+interface Props {
   applyEvent: (evt: IEventReq) => void
   nickname: string
   errorMessage?: string
@@ -29,14 +29,17 @@ const Header = styled.div`
 
 const Cancel = styled(CancelCircle)`
   height: 25px;
-  gridarea: header;
+  grid-area: header;
 `
 
 const MAX_STEP = 7
 
-const EventWizard: FunctionComponent<IProps> = (props: IProps) => {
-  const { applyEvent, nickname, editState, onCancel } = props
-
+export const EventWizard = ({
+  applyEvent,
+  nickname,
+  editState,
+  onCancel,
+}: Props) => {
   const [step, setStep] = useState<number>(0)
   const isEdit = !!editState
 
@@ -50,7 +53,6 @@ const EventWizard: FunctionComponent<IProps> = (props: IProps) => {
 
   const create = (): void => {
     if (!eventState.date || !eventState.type || !eventState.title) {
-      console.error(eventState)
       throw new Error('Impossible state') // TODO: fix
     }
 
@@ -78,9 +80,9 @@ const EventWizard: FunctionComponent<IProps> = (props: IProps) => {
       subtitle,
     }
 
-    const evt: IEventReq = mergeRight(mandatory, optional)
+    const event: IEventReq = mergeRight(mandatory, optional)
 
-    applyEvent(evt)
+    applyEvent(event)
   }
 
   return (
@@ -125,8 +127,7 @@ const EventWizard: FunctionComponent<IProps> = (props: IProps) => {
             {portal(
               <PortalOverlay onClick={closePortal}>
                 <Flex
-                  // tslint:disable-next-line: jsx-no-lambda
-                  onClick={(e) => e.stopPropagation()}
+                  onClick={(event) => event.stopPropagation()}
                   width="80%"
                   sx={{
                     borderRadius: '10px',
@@ -139,7 +140,7 @@ const EventWizard: FunctionComponent<IProps> = (props: IProps) => {
                   flexDirection="column"
                   bg="white"
                 >
-                  <Text fontWeight="bold" my={2}>
+                  <Text fontWeight="600" my={2}>
                     Keskeytä?
                   </Text>
                   <Button
@@ -167,5 +168,3 @@ const EventWizard: FunctionComponent<IProps> = (props: IProps) => {
     </PortalWithState>
   )
 }
-
-export default withTheme(EventWizard)

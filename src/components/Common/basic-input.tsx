@@ -1,7 +1,7 @@
 import { Input } from '@rebass/forms'
 import { FieldConfig, FieldProps } from 'formik'
 import React, { Fragment, FunctionComponent } from 'react'
-import { ErrorText } from '../Common'
+import { ErrorText } from '.'
 
 type CustomInput = FieldConfig &
   FieldProps & {
@@ -9,7 +9,9 @@ type CustomInput = FieldConfig &
     autocomplete?: string
   }
 
-const BasicInput: FunctionComponent<CustomInput> = (props: CustomInput) => {
+export const BasicInput: FunctionComponent<CustomInput> = (
+  props: CustomInput
+) => {
   const {
     field,
     form: { touched, errors },
@@ -36,5 +38,3 @@ const BasicInput: FunctionComponent<CustomInput> = (props: CustomInput) => {
     </Fragment>
   )
 }
-
-export default BasicInput

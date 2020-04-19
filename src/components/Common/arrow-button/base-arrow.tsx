@@ -1,12 +1,13 @@
 import { RightArrow } from '@styled-icons/boxicons-solid/RightArrow'
+import { StyledIcon } from '@styled-icons/styled-icon'
 import React, { FunctionComponent } from 'react'
 import { Button, Flex, Text } from 'rebass/styled-components'
 import styled from 'styled-components'
 
-interface IProps {
+interface Props {
   title: string
-  onClick: any
-  icon: any
+  onClick: () => void
+  icon: StyledIcon
 }
 
 const Arrow = styled(RightArrow)`
@@ -15,7 +16,7 @@ const Arrow = styled(RightArrow)`
   width: 15px;
 `
 
-const ArrowButton: FunctionComponent<IProps> = (props: IProps) => {
+export const ArrowButton: FunctionComponent<Props> = (props: Props) => {
   const { title, onClick, icon } = props
 
   const Icn = styled(icon)`
@@ -37,5 +38,3 @@ const ArrowButton: FunctionComponent<IProps> = (props: IProps) => {
     </Button>
   )
 }
-
-export default ArrowButton
