@@ -1,6 +1,6 @@
 import { Field, Form, Formik, FormikProps, FormikHelpers } from 'formik'
 import React, { Fragment } from 'react'
-import { Box, Flex, Text } from 'rebass'
+import { Box, Flex, Text } from 'rebass/styled-components'
 import * as Yup from 'yup'
 import { UpdateableUserInfo, UserInfo as UserInfoType } from '../../types'
 import { BasicInput, Button } from '../common'
