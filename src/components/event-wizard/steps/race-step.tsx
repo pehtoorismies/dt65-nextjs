@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Flex } from 'rebass'
+import { Button, Flex } from 'rebass/styled-components'
 import { EventStep } from '../../../types'
 import { isNullOrUndefined } from '../../../util/general'
 import { LeftArrowButton, RightArrowButton } from '../../common'

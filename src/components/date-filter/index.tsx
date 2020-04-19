@@ -2,7 +2,7 @@ import { Filter } from '@styled-icons/boxicons-regular/Filter'
 import { CloseCircle } from '@styled-icons/remix-fill/CloseCircle'
 import format from 'date-fns/format'
 import React, { Fragment } from 'react'
-import { Flex, Text } from 'rebass'
+import { Flex, Text } from 'rebass/styled-components'
 import styled from 'styled-components'
 import { colors } from '../../styles/theme'
 

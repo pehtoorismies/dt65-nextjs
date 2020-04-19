@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react'
-import { Flex, Image, Text } from 'rebass'
+import { Flex, Image, Text } from 'rebass/styled-components'
 import fingerUp from '../../images/fingerUp.jpg'
 import { colors } from '../../styles/theme'
 import { Button } from '../common'

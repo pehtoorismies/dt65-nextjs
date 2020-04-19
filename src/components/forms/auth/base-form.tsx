@@ -1,6 +1,6 @@
 import { Formik, FormikHelpers } from 'formik'
 import React, { PropsWithChildren } from 'react'
-import { Box, Flex, Heading, Text } from 'rebass'
+import { Box, Flex, Heading, Text } from 'rebass/styled-components'
 import { FormProps } from '../../../types'
 
 interface Props {

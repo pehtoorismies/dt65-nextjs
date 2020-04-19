@@ -1,5 +1,5 @@
 import React from 'react'
-import { Flex, FlexProps } from 'rebass'
+import { Flex, FlexProps } from 'rebass/styled-components'
 import { MEASURES } from '../../constants'
 
 const common = {

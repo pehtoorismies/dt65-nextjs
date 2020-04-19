@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import { css } from '@emotion/core'
-import { Flex } from 'rebass'
+import { Flex } from 'rebass/styled-components'
 import { Home } from '@styled-icons/boxicons-solid/Home'
 import { PlusSquare } from '@styled-icons/boxicons-solid/PlusSquare'
 import { User } from '@styled-icons/boxicons-solid/User'

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Flex, Text } from 'rebass'
+import { Flex, Text } from 'rebass/styled-components'
 import styled from '@emotion/styled'
 import { ArrowBack } from '@styled-icons/boxicons-regular/ArrowBack'
 import { colors } from '../../styles/theme'

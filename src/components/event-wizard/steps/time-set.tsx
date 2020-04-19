@@ -10,7 +10,7 @@ import {
   ButtonProps,
   FlexProps,
   TextProps,
-} from 'rebass'
+} from 'rebass/styled-components'
 import styled from 'styled-components'
 import { Time } from '../../../types'
 import { timeToString } from '../../../util'

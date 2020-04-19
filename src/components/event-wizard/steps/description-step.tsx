@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
-import { Box, Flex } from 'rebass'
+import { Box, Flex } from 'rebass/styled-components'
 import { EventStep } from '../../../types'
 import { LeftArrowButton, RightArrowButton } from '../../common'
 import { BaseStep } from './base-step'

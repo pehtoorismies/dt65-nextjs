@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Switch from 'react-switch'
-import { Box, Flex, Text } from 'rebass'
+import { Box, Flex, Text } from 'rebass/styled-components'
 import { EventStep, Time } from '../../../types'
 import { LeftArrowButton, RightArrowButton } from '../../common'
 import { BaseStep } from './base-step'

@@ -1,6 +1,6 @@
 import { Field, Form, FormikProps } from 'formik'
 import React from 'react'
-import { Flex } from 'rebass'
+import { Flex } from 'rebass/styled-components'
 import * as Yup from 'yup'
 import { AuthFormProps, FormProps } from '../../../types'
 import { BasicInput, Button } from '../../common'

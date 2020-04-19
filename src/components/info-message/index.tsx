@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react'
-import { Flex, Text } from 'rebass'
+import { Flex, Text } from 'rebass/styled-components'
 
 interface Props {
   message: string

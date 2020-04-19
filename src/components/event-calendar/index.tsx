@@ -13,7 +13,7 @@ import {
 import { fi } from 'date-fns/locale'
 import { filter, head, map, pipe, times } from 'ramda'
 import React, { Fragment } from 'react'
-import { Box, Flex, Image, Text } from 'rebass'
+import { Box, Flex, Image, Text } from 'rebass/styled-components'
 import uuidv4 from 'uuid/v4'
 import { WEEK_DAYS } from '../../constants'
 import logoCycling from '../../images/calendar-logos/cycling.png'

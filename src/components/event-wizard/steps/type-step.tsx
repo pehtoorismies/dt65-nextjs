@@ -1,6 +1,6 @@
 import { map, prop, sortBy } from 'ramda'
 import React from 'react'
-import { Button, Flex } from 'rebass'
+import { Button, Flex } from 'rebass/styled-components'
 import { EventType, EventStep, EventTypeDescriptor } from '../../../types'
 import { RightArrowButton } from '../../common'
 import { BaseStep } from './base-step'

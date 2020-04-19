@@ -1,7 +1,7 @@
 import { UserInjured } from '@styled-icons/fa-solid/UserInjured'
 import { StyledIcon } from '@styled-icons/styled-icon'
 import React from 'react'
-import { Box, Flex, Text } from 'rebass'
+import { Box, Flex, Text } from 'rebass/styled-components'
 import styled from 'styled-components'
 import { colors } from '../../styles/theme'
 import { ArrowButton } from '../common'

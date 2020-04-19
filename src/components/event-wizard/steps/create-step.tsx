@@ -1,6 +1,6 @@
 import React from 'react'
 import Switch from 'react-switch'
-import { Flex, Text } from 'rebass'
+import { Flex, Text } from 'rebass/styled-components'
 import { EVENT_TYPES } from '../../../constants'
 import { EventState, EventStep, LocalUser } from '../../../types'
 import { dateToFinnish, fromEventType, timeToString } from '../../../util'

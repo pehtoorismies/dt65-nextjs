@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react'
-import { Box, Text } from 'rebass'
+import { Box, Text } from 'rebass/styled-components'
 
 interface Props {
   title: string
