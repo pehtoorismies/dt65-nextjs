@@ -1,0 +1,23 @@
+type Event {
+  address: String
+  creator: User!
+  dateTime: Date!
+  description: String
+  participants: [User!]! @relation
+  subtitle: String
+  title: String!
+  type: String!
+  race: Boolean!
+}
+
+type User {
+  nickname: String!
+  sub: String!
+  email: String!
+  events: [Event!] @relation
+}
+
+type Query {
+  allUsers: [User!]! @index(name: "all_users")
+  allEvents: [Event!]! @index(name: "all_events")
+}

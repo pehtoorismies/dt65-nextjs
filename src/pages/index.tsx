@@ -1,5 +1,3 @@
-import React from 'react'
+import { HomePageContainer } from '../containers/home-page'
 
-const Home = () => <h1>Hello world!</h1>
-
-export default Home
+export default HomePageContainer
